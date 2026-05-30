@@ -110,5 +110,6 @@ Pour résoudre ce problème :
 
 ---
 
-## ➡️ Étape Suivante
-Pour comprendre comment développer la partie client de l'application, lier vos routes Laravel à vos composants Vue, et faire fonctionner le Hot-Reload (HMR) de Vite sous Docker, consultez le **[Guide de Développement Frontend (docs/3-frontend.md)](3-frontend.md)**.
+## 🧭 Navigation
+
+| ⬅️ [Architecture (Étape 1)](1-architecture.md) | 🏠 [Retour à l'Accueil](../../README.fr.md) | [Développement Frontend (Étape 3) ➡️](3-frontend.md) |

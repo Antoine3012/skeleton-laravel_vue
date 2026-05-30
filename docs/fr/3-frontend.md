@@ -140,5 +140,6 @@ Toutes les classes Tailwind écrites dans vos fichiers `.vue` ou templates Blade
 
 ---
 
-## ➡️ Étape Suivante
-Pour comprendre la gestion de la base de données MySQL, des migrations de tables et de phpMyAdmin, consultez le **[Guide de Base de Données (docs/4-database.md)](4-database.md)**.
+## 🧭 Navigation
+
+| ⬅️ [Installation (Étape 2)](2-installation.md) | 🏠 [Retour à l'Accueil](../../README.fr.md) | [Base de Données (Étape 4) ➡️](4-database.md) |

@@ -82,5 +82,6 @@ skeleton-laravel_vue/
 
 ---
 
-## ➡️ Étape Suivante
-Pour installer et configurer ce projet sur votre machine locale, rendez-vous sur le **[Guide d'Installation (docs/2-installation.md)](2-installation.md)**.
+## 🧭 Navigation
+
+| 🏠 [Retour à l'Accueil](../../README.fr.md) | [Guide d'Installation (Étape 2) ➡️](2-installation.md) |

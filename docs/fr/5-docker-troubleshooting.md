@@ -120,5 +120,6 @@ Pour éviter les divergences de version de PHP ou Node entre votre système loca
 
 ---
 
-## ➡️ Félicitations
-Vous possédez désormais toutes les clés pour développer sur ce skeleton de manière fluide. Pour toute modification architecturale, n'hésitez pas à enrichir ces documents !
+## 🧭 Navigation
+
+| ⬅️ [Base de Données (Étape 4)](4-database.md) | 🏠 [Retour à l'Accueil](../../README.fr.md) |

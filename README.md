@@ -1,4 +1,8 @@
-# 🚀 Skeleton Laravel 13 & Vue 3 Dockerisé
+# 🚀 Skeleton Laravel 13 & Vue 3 Containerized
+
+<p align="center">
+  🌎 Read this in: 🇬🇧 <b>English</b> | 🇫🇷 <b><a href="README.fr.md">Français</a></b>
+</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Laravel-13.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel 13" />
@@ -9,81 +13,82 @@
   <img src="https://img.shields.io/badge/Docker-compose-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker Compose" />
 </p>
 
-Projet de développement complet (Skeleton) basé sur **Laravel 13** et **Vue.js 3** connectés via **Inertia.js**. Il est entièrement conteneurisé grâce à **Docker** et **Docker Compose** pour une installation et un développement local uniformes, sans conflit et ultra-rapides.
+A complete development project (Skeleton) based on **Laravel 13** and **Vue.js 3** connected via **Inertia.js**. It is fully containerized using **Docker** and **Docker Compose** for seamless, conflict-free, and rapid local development.
 
 ---
 
-## 📖 Guide de Documentation Modulaire
+## 📖 Modular Documentation Guide
 
+To help you get started quickly, the documentation is divided into dedicated guides:
 
-1.  **[🏗️ Architecture du Projet](docs/1-architecture.md)**
-    *   Stack technique globale.
-    *   Visualiser le flux des requêtes avec le pont **Inertia.js**.
-    *   Arborescence des dossiers (`docker/` vs `src/`).
-2.  **[⚙️ Guide d'Installation et Configuration](docs/2-installation.md)**
-    *   Cloner et lancer le projet.
-    *   Configuration des fichiers d'environnement `.env`.
-    *   Gestion et personnalisation des ports hôtes.
-3.  **[🎨 Guide de Développement Frontend](docs/3-frontend.md)**
-    *   Création de pages avec **Vue 3 (Script Setup)**.
-    *   Fonctionnement de **Vite** et du **Hot Module Replacement (HMR)** sous Docker.
-    *   Intégration de **Tailwind CSS** et aliases d'import.
-4.  **[🗄️ Gestion de la Base de Données](docs/4-database.md)**
-    *   Initialisation et base de tests.
-    *   Lancement automatique et manuel des migrations et seeders.
-    *   Accès à l'interface **phpMyAdmin** et configuration de clients externes (DBeaver, DataGrip).
-5.  **[🐳 Docker & Troubleshooting](docs/5-docker-troubleshooting.md)**
-    *   Commandes Docker indispensables (`logs`, `build`, `down -v`).
-    *   Exécution de scripts Artisan, Composer et NPM dans les conteneurs.
-    *   Résolutions de pannes (permissions de fichiers, réinstallations propres, conflits).
+1.  **[🏗️ Project Architecture](docs/en/1-architecture.md)**
+    *   Global technology stack.
+    *   Visualize request workflow through the **Inertia.js** bridge.
+    *   Folder layout tree (`docker/` vs `src/`).
+2.  **[⚙️ Installation and Configuration Guide](docs/en/2-installation.md)**
+    *   Cloning and starting the project.
+    *   Configuring environment variables (`.env` files).
+    *   Handling and customizing host port bindings.
+3.  **[🎨 Frontend Development Guide](docs/en/3-frontend.md)**
+    *   Creating views using **Vue 3 (Script Setup)**.
+    *   Understanding **Vite** and **Hot Module Replacement (HMR)** under Docker.
+    *   Tailwind CSS integration and path aliasing.
+4.  **[🗄️ Database Management](docs/en/4-database.md)**
+    *   Global setup and isolated test database.
+    *   Running automatic and manual migrations and database seeders.
+    *   Accessing **phpMyAdmin** and connecting external SQL clients (DBeaver, DataGrip).
+5.  **[🐳 Docker & Troubleshooting](docs/en/5-docker-troubleshooting.md)**
+    *   Essential Docker Compose operations (`logs`, `build`, `down -v`).
+    *   Executing Artisan, Composer, and NPM commands inside containers.
+    *   Troubleshooting port conflicts, Unix file permissions, and package corruptions.
 
 ---
 
-## 🛠️ Prérequis & ⚡ Quickstart
+## 🛠️ Prerequisites & ⚡ Quickstart
 
-Pour exécuter ce projet, vous devez installer **[Docker](https://www.docker.com/get-started/)** (qui inclut Docker Compose) et **[Git](https://git-scm.com/)** sur votre machine. Aucun autre outil local (PHP, Composer, Node.js ou MySQL) n'est requis.
+To run this project, you must install **[Docker](https://www.docker.com/get-started/)** (which includes Docker Compose) and **[Git](https://git-scm.com/)** on your system. No other local tools (PHP, Composer, Node.js, or MySQL) are required.
 
-### Démarrage rapide (si vous avez déjà Docker et Git) :
+### Quick Start (if you already have Docker and Git):
 
-### 1. Cloner et configurer les environnements
+### 1. Clone the project and configure environment files
 ```bash
-git clone <URL_DU_DEPOT>
+git clone <REPOSITORY_URL>
 cd skeleton-laravel_vue
 
-# Configurer l'environnement Docker racine
+# Configure root Docker environment
 cp .env.example .env
 
-# Configurer l'environnement Laravel
+# Configure Laravel environment
 cd src && cp .env.example .env && cd ..
 ```
 
-### 2. Démarrer les conteneurs
+### 2. Boot the containers
 ```bash
 docker compose up -d
 ```
-> ⏳ *Lors du premier démarrage, Docker installe automatiquement toutes vos dépendances (Composer et NPM), génère votre clé Laravel, exécute les migrations SQL et compile vos assets frontend. Cela prend entre 1 et 3 minutes.*
+> ⏳ *During the first startup, Docker automatically downloads container images, installs PHP dependencies (Composer) and Javascript dependencies (NPM), generates the Laravel app key, runs SQL migrations, and compiles frontend assets. This takes between 1 and 3 minutes.*
 
-### 3. Accéder aux services
-*   🌐 **Application Web (Laravel + Vue)** : [http://localhost:8200](http://localhost:8200)
-*   📊 **phpMyAdmin (Gestion BDD)** : [http://localhost:8201](http://localhost:8201) (Serveur: `db`)
+### 3. Access the services
+*   🌐 **Web Application (Laravel + Vue)**: [http://localhost:8200](http://localhost:8200)
+*   📊 **phpMyAdmin (Database GUI)**: [http://localhost:8201](http://localhost:8201) (Server: `db`)
 
 ---
 
-## 📦 Architecture des Services Docker
+## 📦 Docker Services Architecture
 
-L'infrastructure réseau orchestrée par le fichier `compose.yml` se compose de 3 services principaux isolés :
+The network infrastructure orchestrated by the `compose.yml` file consists of 3 isolated main services:
 
-| Service | Image / Source | Rôle | Accès Interne | Accès Externe (Hôte) |
+| Service | Image / Source | Role | Internal Port | External Port (Host) |
 | :---: | :--- | :--- | :---: | :---: |
-| **`app`** | `./docker/php/Dockerfile` (PHP 8.5) | **Serveur Web & PHP** : Contient PHP 8.5 + Apache + Node.js et expose l'application basée sur le code de `src/`. | `Port 80` | `http://localhost:8200` |
-| **`db`** | `mysql:8.4` | **Base de données** : Serveur MySQL. Données persistantes via le volume `db_data`. | `Port 3306` | `127.0.0.1:3308` |
-| **`phpmyadmin`**| `phpmyadmin:latest` | **Administration BDD** : Interface web connectée automatiquement au service `db`. | `Port 80` | `http://localhost:8201` |
+| **`app`** | `./docker/php/Dockerfile` (PHP 8.5) | **Web & PHP Server**: Apache + PHP 8.5 + Node.js exposing the application from `src/`. | `Port 80` | `http://localhost:8200` |
+| **`db`** | `mysql:8.4` | **Database Server**: Persistent MySQL database using the `db_data` volume. | `Port 3306` | `127.0.0.1:3308` |
+| **`phpmyadmin`**| `phpmyadmin:latest` | **Database GUI**: Web interface connected automatically to the `db` service. | `Port 80` | `http://localhost:8201` |
 
 ---
 
-## 💡 Commandes Utiles de Secours
+## 💡 Useful Operational Commands
 
-*   **Arrêter les conteneurs proprement** : `docker compose down`
-*   **Voir l'activité et déboguer (logs)** : `docker compose logs -f`
-*   **Lancer une migration manuellement** : `docker exec -it laravel_app php artisan migrate`
-*   **Réinitialiser la base de données de zéro** : `docker compose down -v && docker compose up -d`
+*   **Stop containers safely**: `docker compose down`
+*   **Monitor logs in real-time**: `docker compose logs -f`
+*   **Run migrations manually**: `docker exec -it laravel_app php artisan migrate`
+*   **Wipe and fresh restart database data**: `docker compose down -v && docker compose up -d`

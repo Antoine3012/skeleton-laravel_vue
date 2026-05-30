@@ -88,5 +88,6 @@ Si vous préférez utiliser un client SQL lourd installé sur votre machine hôt
 
 ---
 
-## ➡️ Étape Suivante
-Pour connaître les commandes Docker indispensables et résoudre les pannes courantes (problèmes de permissions, réinitialisation de BDD, etc.), lisez le **[Guide Docker & Dépannage (docs/5-docker-troubleshooting.md)](5-docker-troubleshooting.md)**.
+## 🧭 Navigation
+
+| ⬅️ [Développement Frontend (Étape 3)](3-frontend.md) | 🏠 [Retour à l'Accueil](../../README.fr.md) | [Docker & Dépannage (Étape 5) ➡️](5-docker-troubleshooting.md) |
