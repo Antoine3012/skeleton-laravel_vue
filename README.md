@@ -1,139 +1,89 @@
-# 🚀 Skeleton Laravel 13 Dockerisé
+# 🚀 Skeleton Laravel 13 & Vue 3 Dockerisé
 
 <p align="center">
   <img src="https://img.shields.io/badge/Laravel-13.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel 13" />
+  <img src="https://img.shields.io/badge/Vue.js-3.x-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white" alt="Vue 3" />
+  <img src="https://img.shields.io/badge/Inertia.js-2.0-9553E9?style=for-the-badge&logo=inertia&logoColor=white" alt="Inertia.js" />
   <img src="https://img.shields.io/badge/PHP-8.5-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.5" />
   <img src="https://img.shields.io/badge/MySQL-8.4-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL 8.4" />
   <img src="https://img.shields.io/badge/Docker-compose-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker Compose" />
 </p>
 
-Ce projet est un environnement de développement complet (Skeleton) basé sur **Laravel 13**. Il est entièrement conteneurisé grâce à **Docker** et **Docker Compose** pour une installation rapide, uniforme et sans conflit.
+Projet de développement complet (Skeleton) basé sur **Laravel 13** et **Vue.js 3** connectés via **Inertia.js**. Il est entièrement conteneurisé grâce à **Docker** et **Docker Compose** pour une installation et un développement local uniformes, sans conflit et ultra-rapides.
 
 ---
 
-## 📋 Table des Matières
+## 📖 Guide de Documentation Modulaire
 
-- [✨ Fonctionnalités](#-fonctionnalités)
-- [🛠 Prérequis](#-prérequis)
-- [⚙️ Configuration Initiale](#️-configuration-initiale)
-- [🚀 Lancement du Projet](#-lancement-du-projet)
-- [📦 Architecture des Conteneurs](#-architecture-des-conteneurs)
-- [🗄️ Accès aux Services](#️-accès-aux-services)
-- [💡 Commandes Utiles](#-commandes-utiles)
 
----
-
-## ✨ Fonctionnalités
-
-- **PHP 8.5** avec Apache prêt à l'emploi.
-- **Laravel 13** préconfiguré pour communiquer avec la base de données MySQL.
-- **MySQL 8.4** avec script d'initialisation automatique via `docker/mysql/init.sql`.
-- **phpMyAdmin** intégré pour gérer facilement votre base de données via une interface graphique.
-- Architecture modulaire, isolée et simple à déployer.
-
----
-
-## 🛠 Prérequis
-
-Avant de commencer, assurez-vous de disposer des outils suivants sur votre machine :
-- [Docker](https://www.docker.com/get-started)
-- [Docker Compose](https://docs.docker.com/compose/install/)
-- [Git](https://git-scm.com/)
+1.  **[🏗️ Architecture du Projet](docs/1-architecture.md)**
+    *   Stack technique globale.
+    *   Visualiser le flux des requêtes avec le pont **Inertia.js**.
+    *   Arborescence des dossiers (`docker/` vs `src/`).
+2.  **[⚙️ Guide d'Installation et Configuration](docs/2-installation.md)**
+    *   Cloner et lancer le projet.
+    *   Configuration des fichiers d'environnement `.env`.
+    *   Gestion et personnalisation des ports hôtes.
+3.  **[🎨 Guide de Développement Frontend](docs/3-frontend.md)**
+    *   Création de pages avec **Vue 3 (Script Setup)**.
+    *   Fonctionnement de **Vite** et du **Hot Module Replacement (HMR)** sous Docker.
+    *   Intégration de **Tailwind CSS** et aliases d'import.
+4.  **[🗄️ Gestion de la Base de Données](docs/4-database.md)**
+    *   Initialisation et base de tests.
+    *   Lancement automatique et manuel des migrations et seeders.
+    *   Accès à l'interface **phpMyAdmin** et configuration de clients externes (DBeaver, DataGrip).
+5.  **[🐳 Docker & Troubleshooting](docs/5-docker-troubleshooting.md)**
+    *   Commandes Docker indispensables (`logs`, `build`, `down -v`).
+    *   Exécution de scripts Artisan, Composer et NPM dans les conteneurs.
+    *   Résolutions de pannes (permissions de fichiers, réinstallations propres, conflits).
 
 ---
 
-## ⚙️ Configuration Initiale
+## 🛠️ Prérequis & ⚡ Quickstart
 
-1. **Cloner le dépôt :**
-   ```bash
-   git clone <URL_DU_DEPOT>
-   cd skeleton-laravel
-   ```
+Pour exécuter ce projet, vous devez installer **[Docker](https://www.docker.com/get-started/)** (qui inclut Docker Compose) et **[Git](https://git-scm.com/)** sur votre machine. Aucun autre outil local (PHP, Composer, Node.js ou MySQL) n'est requis.
 
-2. **Configurer l'environnement Docker :**
-   Copiez le fichier d'exemple fourni à la racine et renommez-le :
-   ```bash
-   cp .env.example .env
-   ```
-   *Ouvrez le fichier `.env` afin de personnaliser les mots de passe de la base de données (`DB_PASSWORD`, `DB_ROOT_PASSWORD`) pour plus de sécurité.*
+### Démarrage rapide (si vous avez déjà Docker et Git) :
 
-3. **Configurer l'environnement Laravel :**
-   Allez dans le dossier source et configurez le `.env` de Laravel :
-   ```bash
-   cd src
-   cp .env.example .env
-   ```
-   *(Modifiez l'URL de l'application - `APP_URL` - ou d'autres paramètres spécifiques à Laravel dans ce fichier `src/.env`).*
+### 1. Cloner et configurer les environnements
+```bash
+git clone <URL_DU_DEPOT>
+cd skeleton-laravel_vue
 
----
+# Configurer l'environnement Docker racine
+cp .env.example .env
 
-## 🚀 Lancement du Projet
+# Configurer l'environnement Laravel
+cd src && cp .env.example .env && cd ..
+```
 
-Pour démarrer tous les services en arrière-plan, exécutez la commande suivante à la racine du projet :
-
+### 2. Démarrer les conteneurs
 ```bash
 docker compose up -d
 ```
+> ⏳ *Lors du premier démarrage, Docker installe automatiquement toutes vos dépendances (Composer et NPM), génère votre clé Laravel, exécute les migrations SQL et compile vos assets frontend. Cela prend entre 1 et 3 minutes.*
 
-> ⏳ *Lors de la première exécution, le téléchargement des images, la construction du conteneur applicatif (PHP 8.5 + Apache), l'installation automatique des dépendances via Composer, la génération de la clé Laravel, et l'exécution automatique des migrations de base de données s'exécutent de manière totalement automatisée.*
-
----
-
-## 📦 Architecture des Conteneurs
-
-L'environnement réseau est orchestré par le fichier `compose.yml` et se compose de 3 services :
-
-| Service | Source/Image | Rôle |
-|:---:|:---|:---|
-| **`app`** | `./docker/php/Dockerfile` (PHP 8.5) | **Serveur Web & PHP** : Contient PHP 8.5 + Apache et expose l'application basée sur le code de `src/`. |
-| **`db`** | `mysql:8.4` | **Base de données** : Serveur MySQL. Les données sont persistantes grâce au volume partagé `db_data`. |
-| **`phpmyadmin`**| `phpmyadmin:latest` | **Administration BDD** : Interface web connectée automatiquement au service `db`. |
+### 3. Accéder aux services
+*   🌐 **Application Web (Laravel + Vue)** : [http://localhost:8200](http://localhost:8200)
+*   📊 **phpMyAdmin (Gestion BDD)** : [http://localhost:8201](http://localhost:8201) (Serveur: `db`)
 
 ---
 
-## 🗄️ Accès aux Services
+## 📦 Architecture des Services Docker
 
-Une fois les conteneurs démarrés, vous pouvez accéder à vos différents services via ces liens :
+L'infrastructure réseau orchestrée par le fichier `compose.yml` se compose de 3 services principaux isolés :
 
-- 🌐 **Application Laravel :** [http://localhost:8200](http://localhost:8200)
-- 📊 **phpMyAdmin :** [http://localhost:8201](http://localhost:8201)
-  - *Serveur* : `db` (se connecte via le réseau Docker)
-  - *Utilisateur* : `default_user` *(voir `.env`)*
-  - *Mot de passe* : `default_password` *(voir `.env`)*
-
-🔌 **Connexion Externe à la base (ex: DBeaver, DataGrip) :** 
-- **Hôte :** `127.0.0.1` 
-- **Port :** `3308`
-
-> **Note :** Si les ports `8200` ou `8201` sont déjà utilisés sur votre machine hôte, vous pouvez facilement les modifier en ajustant `APP_PORT` et `PHPMYADMIN_PORT` dans le fichier `.env` à la racine.
+| Service | Image / Source | Rôle | Accès Interne | Accès Externe (Hôte) |
+| :---: | :--- | :--- | :---: | :---: |
+| **`app`** | `./docker/php/Dockerfile` (PHP 8.5) | **Serveur Web & PHP** : Contient PHP 8.5 + Apache + Node.js et expose l'application basée sur le code de `src/`. | `Port 80` | `http://localhost:8200` |
+| **`db`** | `mysql:8.4` | **Base de données** : Serveur MySQL. Données persistantes via le volume `db_data`. | `Port 3306` | `127.0.0.1:3308` |
+| **`phpmyadmin`**| `phpmyadmin:latest` | **Administration BDD** : Interface web connectée automatiquement au service `db`. | `Port 80` | `http://localhost:8201` |
 
 ---
 
-## 💡 Commandes Utiles
+## 💡 Commandes Utiles de Secours
 
-**Arrêter les conteneurs (en conservant les données) :**
-```bash
-docker compose down
-```
-
-**Arrêter les conteneurs et détruire les volumes (⚠️ Supprime la BDD) :**
-```bash
-docker compose down -v
-```
-
-**Voir les logs en temps réel (pour le débogage) :**
-```bash
-docker compose logs -f
-```
-
-**Exécuter des commandes Artisan (Laravel) :**
-Pour utiliser la CLI Laravel (ex: lancer une migration ou vider le cache), il faut le faire au sein du conteneur `app` :
-```bash
-docker exec -it laravel_app php artisan migrate
-docker exec -it laravel_app php artisan cache:clear
-```
-
-**Accéder au terminal du conteneur applicatif :**
-```bash
-docker exec -it laravel_app /bin/bash
-```
+*   **Arrêter les conteneurs proprement** : `docker compose down`
+*   **Voir l'activité et déboguer (logs)** : `docker compose logs -f`
+*   **Lancer une migration manuellement** : `docker exec -it laravel_app php artisan migrate`
+*   **Réinitialiser la base de données de zéro** : `docker compose down -v && docker compose up -d`
