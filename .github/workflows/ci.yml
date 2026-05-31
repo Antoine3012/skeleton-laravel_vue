@@ -1,0 +1,83 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main", "master", "develop" ]
+  pull_request:
+    branches: [ "main", "master", "develop" ]
+
+jobs:
+  laravel-tests:
+    name: Backend Tests & Lint (PHP)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
+          coverage: none
+
+      - name: Locate composer cache directory
+        id: composer-cache
+        working-directory: src
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install Composer dependencies
+        working-directory: src
+        run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+      - name: Copy env file
+        working-directory: src
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+      - name: Generate Laravel application key
+        working-directory: src
+        run: php artisan key:generate
+
+      - name: Run PHP Code Style (Laravel Pint)
+        working-directory: src
+        run: vendor/bin/pint --test
+
+      - name: Run Backend Tests
+        working-directory: src
+        run: php artisan test
+
+  frontend-tests:
+    name: Frontend Tests & Build (Node)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: src/package-lock.json
+
+      - name: Install Node dependencies
+        working-directory: src
+        run: npm ci
+
+      - name: Run Frontend Tests
+        working-directory: src
+        run: npm run test:unit
+
+      - name: Build Assets
+        working-directory: src
+        run: npm run build
