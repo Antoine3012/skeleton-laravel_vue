@@ -15,29 +15,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 1. Setup & Build Frontend (Node.js)
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-          cache-dependency-path: src/package-lock.json
-
-      - name: Install Node dependencies
-        working-directory: src
-        run: npm ci
-
-      - name: Run Frontend Tests
-        working-directory: src
-        run: npm run test:unit
-        env:
-          LARAVEL_BYPASS_ENV_CHECK: 1
-
-      - name: Build Assets (Vite)
-        working-directory: src
-        run: npm run build
-
-      # 2. Setup & Test Backend (PHP)
+      # 1. Setup & Install Backend (PHP) - Creates vendor/ directory needed by Vite
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -70,6 +48,29 @@ jobs:
         working-directory: src
         run: php artisan key:generate
 
+      # 2. Setup & Build Frontend (Node.js) - Can now resolve vendor/ imports (Ziggy)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: src/package-lock.json
+
+      - name: Install Node dependencies
+        working-directory: src
+        run: npm ci
+
+      - name: Run Frontend Tests
+        working-directory: src
+        run: npm run test:unit
+        env:
+          LARAVEL_BYPASS_ENV_CHECK: 1
+
+      - name: Build Assets (Vite)
+        working-directory: src
+        run: npm run build
+
+      # 3. Lint & Test Backend (PHP)
       - name: Run PHP Code Style (Laravel Pint)
         working-directory: src
         run: vendor/bin/pint --test
