@@ -9,10 +9,12 @@ graph TD
     Checkout[1. Checkout Code] --> SetupPHP[2. Setup PHP 8.5 & Extensions]
     SetupPHP --> Composer[3. composer install]
     Composer --> SetupNode[4. Setup Node.js 20]
-    SetupNode --> Vitest[5. npm run test:unit]
-    Vitest --> ViteBuild[6. npm run build]
-    ViteBuild --> Pint[7. vendor/bin/pint --test]
-    Pint --> PHPUnit[8. php artisan test]
+    SetupNode --> ESLint[5. npm run lint]
+    ESLint --> Prettier[6. npm run format:check]
+    Prettier --> Vitest[7. npm run test:unit]
+    Vitest --> ViteBuild[8. npm run build]
+    ViteBuild --> Pint[9. vendor/bin/pint --test]
+    Pint --> PHPUnit[10. php artisan test]
 ```
 
 ---
@@ -30,6 +32,7 @@ The workflow is configured in the file [`.github/workflows/ci.yml`](../../.githu
 ### 2. Node.js Frontend Initialization & Build
 - **Version**: Node.js 20 with npm caching.
 - **Dependencies**: Strict installation via `npm ci`.
+- **Style & Formatting (ESLint & Prettier)**: Runs `npm run lint` for static analysis and `npm run format:check` to check frontend formatting.
 - **Unit Tests (Vitest)**: Runs `npm run test:unit` with the environment variable `LARAVEL_BYPASS_ENV_CHECK: 1` to prevent the CI security block.
 - **Production Build**: Compiles assets via `npm run build`. This generates the `manifest.json` file required by Inertia.js.
 
@@ -49,11 +52,23 @@ If the pipeline fails during the `Laravel Pint` step, it means some PHP files do
     ```
 *   Then, commit and push the corrections.
 
-### 2. Missing Import in Production
+### 2. Frontend Linter or Style Failure (ESLint / Prettier)
+If the pipeline fails during the ESLint check or Prettier formatting check, it means frontend files do not respect the defined rules.
+*   **Automatic Correction**: From your host machine or inside the Docker container, run:
+    ```bash
+    # Fix JS/Vue syntax/style errors
+    docker exec -it laravel_app npm run lint
+    
+    # Format all files (JS, Vue, CSS, JSON, MD)
+    docker exec -it laravel_app npm run format
+    ```
+*   Then, commit and push the corrections.
+
+### 3. Missing Import in Production
 If the build fails due to a missing PHP import in your JS code (e.g., Ziggy), make sure `composer install` is run before Vite is called.
 
 ---
 
 ## 🧭 Navigation
 
-| ⬅️ [Automated Tests (Step 6)](6-tests.md) | 🏠 [Back to Home](../../README.md) |
+| ⬅️ [Automated Tests (Step 6)](6-tests.md) | 🏠 [Back to Home](../../README.md) | [Code Quality (Step 8) ➡️](8-code-quality.md) |

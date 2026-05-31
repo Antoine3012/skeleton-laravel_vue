@@ -60,6 +60,14 @@ jobs:
         working-directory: src
         run: npm ci
 
+      - name: Run Frontend Lint (ESLint)
+        working-directory: src
+        run: npm run lint
+
+      - name: Run Frontend Format Check (Prettier)
+        working-directory: src
+        run: npm run format:check
+
       - name: Run Frontend Tests
         working-directory: src
         run: npm run test:unit

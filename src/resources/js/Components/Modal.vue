@@ -36,7 +36,7 @@ watch(
                 showSlot.value = false;
             }, 200);
         }
-    },
+    }
 );
 
 const close = () => {
@@ -76,13 +76,10 @@ const maxWidthClass = computed(() => {
 
 <template>
     <dialog
-        class="z-50 m-0 min-h-full min-w-full overflow-y-auto bg-transparent backdrop:bg-transparent"
         ref="dialog"
+        class="z-50 m-0 min-h-full min-w-full overflow-y-auto bg-transparent backdrop:bg-transparent"
     >
-        <div
-            class="fixed inset-0 z-50 overflow-y-auto px-4 py-6 sm:px-0"
-            scroll-region
-        >
+        <div class="fixed inset-0 z-50 overflow-y-auto px-4 py-6 sm:px-0" scroll-region>
             <Transition
                 enter-active-class="ease-out duration-300"
                 enter-from-class="opacity-0"
@@ -91,14 +88,8 @@ const maxWidthClass = computed(() => {
                 leave-from-class="opacity-100"
                 leave-to-class="opacity-0"
             >
-                <div
-                    v-show="show"
-                    class="fixed inset-0 transform transition-all"
-                    @click="close"
-                >
-                    <div
-                        class="absolute inset-0 bg-gray-500 opacity-75"
-                    />
+                <div v-show="show" class="fixed inset-0 transform transition-all" @click="close">
+                    <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
                 </div>
             </Transition>
 
@@ -115,7 +106,7 @@ const maxWidthClass = computed(() => {
                     class="mb-6 transform overflow-hidden rounded-lg bg-white shadow-xl transition-all sm:mx-auto sm:w-full"
                     :class="maxWidthClass"
                 >
-                    <slot v-if="showSlot" />
+                    <slot v-if="showSlot"></slot>
                 </div>
             </Transition>
         </div>

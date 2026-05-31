@@ -1,0 +1,11 @@
+/vendor
+/public
+/storage
+/bootstrap/cache
+/node_modules
+/dist
+/dev-dist
+package-lock.json
+composer.lock
+.phpunit.result.cache
+*.sqlite

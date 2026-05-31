@@ -49,6 +49,9 @@ To help you get started quickly, the documentation is divided into dedicated gui
     *   Automated pipeline powered by **GitHub Actions**.
     *   Linting, testing, and production build checks on every Pull Request.
     *   Resolving common CI errors (Pint style, Ziggy imports).
+8.  **[💎 Code Quality & Formatters](docs/en/8-code-quality.md)**
+    *   PHP backend standards with **Laravel Pint**.
+    *   Frontend style and quality using **ESLint** and **Prettier**.
 
 ---
 
@@ -99,5 +102,6 @@ The network infrastructure orchestrated by the `compose.yml` file consists of 3 
 *   **Stop containers safely**: `docker compose down`
 *   **Monitor logs in real-time**: `docker compose logs -f`
 *   **Run all tests (PHPUnit + Vitest)**: `docker exec -it laravel_app npm run test`
+*   **Run formatters and linters**: `docker exec -it laravel_app npm run lint` & `docker exec -it laravel_app php vendor/bin/pint`
 *   **Run migrations manually**: `docker exec -it laravel_app php artisan migrate`
 *   **Wipe and fresh restart database data**: `docker compose down -v && docker compose up -d`

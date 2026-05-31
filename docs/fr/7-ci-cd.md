@@ -9,10 +9,12 @@ graph TD
     Checkout[1. Récupération du Code] --> SetupPHP[2. Setup PHP 8.5 & Extensions]
     SetupPHP --> Composer[3. composer install]
     Composer --> SetupNode[4. Setup Node.js 20]
-    SetupNode --> Vitest[5. npm run test:unit]
-    Vitest --> ViteBuild[6. npm run build]
-    ViteBuild --> Pint[7. vendor/bin/pint --test]
-    Pint --> PHPUnit[8. php artisan test]
+    SetupNode --> ESLint[5. npm run lint]
+    ESLint --> Prettier[6. npm run format:check]
+    Prettier --> Vitest[7. npm run test:unit]
+    Vitest --> ViteBuild[8. npm run build]
+    ViteBuild --> Pint[9. vendor/bin/pint --test]
+    Pint --> PHPUnit[10. php artisan test]
 ```
 
 ---
@@ -30,6 +32,7 @@ Le workflow est configuré dans le fichier [`.github/workflows/ci.yml`](../../.g
 ### 2. Initialisation & Build Frontend (Node.js)
 - **Version** : Node.js 20 avec mise en cache npm.
 - **Dépendances** : Installation stricte via `npm ci`.
+- **Style & Formate (ESLint & Prettier)** : Exécution de `npm run lint` pour l'analyse statique et `npm run format:check` pour vérifier le formatage de tous les fichiers frontend.
 - **Tests unitaires (Vitest)** : Exécution de `npm run test:unit` avec la variable d'environnement `LARAVEL_BYPASS_ENV_CHECK: 1` pour éviter le blocage de sécurité en CI.
 - **Build de Production** : Compilation des assets via `npm run build`. Cette étape génère le fichier `manifest.json` requis par Inertia.js.
 
@@ -49,11 +52,23 @@ Si le pipeline échoue à l'étape `Laravel Pint`, cela signifie que des fichier
     ```
 *   Puis, commitez et poussez les corrections.
 
-### 2. Erreur d'import manquant en production
+### 2. Échec de style ou linter frontend (ESLint / Prettier)
+Si le pipeline échoue à l'étape de linter JS/Vue ou de vérification Prettier, c'est que des fichiers du frontend ne respectent pas les conventions définies.
+*   **Correction automatique** : Depuis votre machine ou votre conteneur, exécutez :
+    ```bash
+    # Corriger les erreurs de syntaxe/style JS/Vue
+    docker exec -it laravel_app npm run lint
+    
+    # Formater tous les fichiers (JS, Vue, CSS, JSON, MD)
+    docker exec -it laravel_app npm run format
+    ```
+*   Puis, commitez et poussez les corrections.
+
+### 3. Erreur d'import manquant en production
 Si le build échoue à cause d'un import de fichier PHP manquant dans votre code JS (ex: Ziggy), assurez-vous que `composer install` est bien exécuté avant d'appeler Vite.
 
 ---
 
 ## 🧭 Navigation
 
-| ⬅️ [Tests Automatisés (Étape 6)](6-tests.md) | 🏠 [Retour à l'Accueil](../../README.fr.md) |
+| ⬅️ [Tests Automatisés (Étape 6)](6-tests.md) | 🏠 [Retour à l'Accueil](../../README.fr.md) | [Qualité de Code (Étape 8) ➡️](8-code-quality.md) |
