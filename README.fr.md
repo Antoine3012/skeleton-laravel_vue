@@ -45,6 +45,10 @@ Pour faciliter la prise en main, la documentation a été découpée en guides t
     *   Structure unifiée (PHPUnit pour PHP et Vitest pour Vue 3).
     *   Commandes pour exécuter tous les tests ou des cibles spécifiques.
     *   Écriture de nouveaux tests unitaires backend et frontend.
+7.  **[🚀 Intégration Continue (CI/CD)](docs/fr/7-ci-cd.md)**
+    *   Pipeline automatisé avec **GitHub Actions**.
+    *   Linting, tests et validation du build de production à chaque Pull Request.
+    *   Résolution des pannes courantes en CI (style Pint, dépendances Ziggy).
 
 ---
 

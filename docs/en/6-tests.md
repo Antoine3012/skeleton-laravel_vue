@@ -110,4 +110,4 @@ class MathTest extends TestCase
 
 ## 🧭 Navigation
 
-| ⬅️ [Docker & Troubleshooting (Step 5)](5-docker-troubleshooting.md) | 🏠 [Back to Home](../../README.md) |
+| ⬅️ [Docker & Troubleshooting (Step 5)](5-docker-troubleshooting.md) | 🏠 [Back to Home](../../README.md) | [Continuous Integration (Step 7) ➡️](7-ci-cd.md) |
