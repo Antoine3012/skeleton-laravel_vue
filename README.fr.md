@@ -52,6 +52,8 @@ Pour faciliter la prise en main, la documentation a été découpée en guides t
 8.  **[💎 Qualité de Code & Formateurs](docs/fr/8-code-quality.md)**
     *   Standards backend PHP avec **Laravel Pint**.
     *   Qualité et style frontend avec **ESLint** et **Prettier**.
+9.  **[🛠️ Simplification des Commandes (Makefile)](docs/fr/9-makefile.md)**
+    *   Point d'entrée unique pour la stack Docker/Laravel/Vue.
 
 ---
 
@@ -97,11 +99,15 @@ L'infrastructure réseau orchestrée par le fichier `compose.yml` se compose de 
 
 ---
 
-## 💡 Commandes Utiles de Secours
+## 💡 Commandes Utiles (Simplifiées via Makefile)
 
-*   **Arrêter les conteneurs proprement** : `docker compose down`
-*   **Voir l'activité et déboguer (logs)** : `docker compose logs -f`
-*   **Lancer les tests (PHPUnit + Vitest)** : `docker exec -it laravel_app npm run test`
-*   **Lancer les formateurs et linters** : `docker exec -it laravel_app npm run lint` & `docker exec -it laravel_app php vendor/bin/pint`
-*   **Lancer une migration manuellement** : `docker exec -it laravel_app php artisan migrate`
-*   **Réinitialiser la base de données de zéro** : `docker compose down -v && docker compose up -d`
+Grâce au **[Makefile (Étape 9)](docs/fr/9-makefile.md)**, toutes vos commandes quotidiennes sont simplifiées :
+
+*   **Afficher l'aide interactive** : `make` (ou `make help`)
+*   **Démarrer la stack Docker** : `make up`
+*   **Arrêter les conteneurs proprement** : `make down`
+*   **Voir l'activité et déboguer (logs)** : `make logs`
+*   **Lancer tous les tests (PHPUnit + Vitest)** : `make test`
+*   **Lancer les formateurs et linters** : `make format`
+*   **Exécuter les migrations de base de données** : `make migrate`
+*   **Réinitialiser complètement la base de données** : `make db-reset`

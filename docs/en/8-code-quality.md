@@ -81,4 +81,4 @@ Refer to the **[🚀 Continuous Integration (Step 7)](7-ci-cd.md)** guide to lea
 
 ## 🧭 Navigation
 
-| ⬅️ [Continuous Integration (Step 7)](7-ci-cd.md) | 🏠 [Back to Home](../../README.md) |
+| ⬅️ [Continuous Integration (Step 7)](7-ci-cd.md) | 🏠 [Back to Home](../../README.md) | ➡️ [Simplification with Makefile (Step 9)](9-makefile.md) |

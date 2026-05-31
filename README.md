@@ -52,6 +52,8 @@ To help you get started quickly, the documentation is divided into dedicated gui
 8.  **[💎 Code Quality & Formatters](docs/en/8-code-quality.md)**
     *   PHP backend standards with **Laravel Pint**.
     *   Frontend style and quality using **ESLint** and **Prettier**.
+9.  **[🛠️ Command Simplification (Makefile)](docs/en/9-makefile.md)**
+    *   Single entry point to control the Docker/Laravel/Vue stack.
 
 ---
 
@@ -97,11 +99,15 @@ The network infrastructure orchestrated by the `compose.yml` file consists of 3 
 
 ---
 
-## 💡 Useful Operational Commands
+## 💡 Useful Operational Commands (Simplified via Makefile)
 
-*   **Stop containers safely**: `docker compose down`
-*   **Monitor logs in real-time**: `docker compose logs -f`
-*   **Run all tests (PHPUnit + Vitest)**: `docker exec -it laravel_app npm run test`
-*   **Run formatters and linters**: `docker exec -it laravel_app npm run lint` & `docker exec -it laravel_app php vendor/bin/pint`
-*   **Run migrations manually**: `docker exec -it laravel_app php artisan migrate`
-*   **Wipe and fresh restart database data**: `docker compose down -v && docker compose up -d`
+Thanks to the **[Makefile (Step 9)](docs/en/9-makefile.md)**, all your daily commands are highly simplified:
+
+*   **Display interactive help**: `make` (or `make help`)
+*   **Start the Docker stack**: `make up`
+*   **Stop containers safely**: `make down`
+*   **Monitor logs in real-time**: `make logs`
+*   **Run all tests (PHPUnit + Vitest)**: `make test`
+*   **Run formatters and linters**: `make format`
+*   **Execute database migrations**: `make migrate`
+*   **Full database reset**: `make db-reset`

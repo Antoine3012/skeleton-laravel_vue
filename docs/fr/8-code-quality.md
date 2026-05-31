@@ -81,4 +81,4 @@ Reportez-vous au guide **[🚀 Intégration Continue (Étape 7)](7-ci-cd.md)** p
 
 ## 🧭 Navigation
 
-| ⬅️ [Intégration Continue (Étape 7)](7-ci-cd.md) | 🏠 [Retour à l'Accueil](../../README.fr.md) |
+| ⬅️ [Intégration Continue (Étape 7)](7-ci-cd.md) | 🏠 [Retour à l'Accueil](../../README.fr.md) | ➡️ [Simplification avec Makefile (Étape 9)](9-makefile.md) |
