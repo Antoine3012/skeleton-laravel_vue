@@ -88,6 +88,29 @@ Une fois l'installation terminée avec succès, vous pouvez ouvrir votre navigat
     *   *Serveur* : `db`
     *   *Utilisateur* : `default_user` (ou la valeur de `DB_USER` du `.env` racine)
     *   *Mot de passe* : `default_password` (ou la valeur de `DB_PASSWORD` du `.env` racine)
+*   **Bilan de santé applicatif (Health Check)** : [http://localhost:8200/up](http://localhost:8200/up)
+
+---
+
+## 🏥 Bilans de Santé (Health Checks)
+
+Le projet intègre un système de surveillance à deux niveaux :
+
+### 1. Niveau Applicatif (Laravel)
+L'URL `/up` effectue en temps réel plusieurs diagnostics critiques :
+*   **Base de Données** : Vérifie la connectivité active avec le conteneur MySQL.
+*   **Cache** : Vérifie que le service de stockage temporaire (Cache) accepte les opérations en lecture et écriture.
+*   **Système de Fichiers** : Vérifie les permissions d'écriture sur les répertoires système essentiels (`storage/framework/cache`, `storage/logs`).
+
+Si l'un de ces points échoue (par exemple, perte de connexion avec la base de données), l'URL renvoie un statut **HTTP 500** avec un payload JSON `{ "status": "down" }`.
+
+### 2. Niveau Infrastructure (Docker Compose)
+Le conteneur `laravel_app` est configuré avec un `healthcheck` périodique. Docker exécute automatiquement en arrière-plan la commande suivante toutes les 30 secondes :
+```bash
+curl -f http://localhost/up
+```
+*   Si le conteneur est pleinement fonctionnel, son état passe à `(healthy)`.
+*   Vous pouvez consulter cet état à tout moment via la commande `make ps` (ou `docker compose ps`).
 
 ---
 

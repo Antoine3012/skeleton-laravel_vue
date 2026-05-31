@@ -88,6 +88,29 @@ Once the setup completes, open your browser and navigate to:
     *   *Server*: `db`
     *   *Username*: `default_user` (or your custom `DB_USER` from the root `.env`)
     *   *Password*: `default_password` (or your custom `DB_PASSWORD` from the root `.env`)
+*   **Application Health Check**: [http://localhost:8200/up](http://localhost:8200/up)
+
+---
+
+## 🏥 Health Checks
+
+The project includes a robust, two-tiered health monitoring system:
+
+### 1. Application-Level (Laravel)
+The `/up` endpoint performs several live critical diagnostics:
+*   **Database**: Confirms an active connection to the MySQL container.
+*   **Cache**: Assures that the default temporary storage store supports reading and writing operations.
+*   **Filesystem**: Verifies write permissions on essential system directories (`storage/framework/cache`, `storage/logs`).
+
+If any check fails (e.g., database goes offline), the endpoint returns an **HTTP 500** status code with a JSON payload of `{ "status": "down" }`.
+
+### 2. Infrastructure-Level (Docker Compose)
+The `laravel_app` container is configured with a periodic Docker `healthcheck`. Docker automatically runs the following command in the background every 30 seconds:
+```bash
+curl -f http://localhost/up
+```
+*   Once the container is fully initialized and passing the checks, its status shifts to `(healthy)`.
+*   You can view this status at any time by running `make ps` (or `docker compose ps`).
 
 ---
 
