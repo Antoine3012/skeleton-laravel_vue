@@ -30,6 +30,8 @@ jobs:
       - name: Run Frontend Tests
         working-directory: src
         run: npm run test:unit
+        env:
+          LARAVEL_BYPASS_ENV_CHECK: 1
 
       - name: Build Assets (Vite)
         working-directory: src
