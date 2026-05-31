@@ -7,14 +7,35 @@ on:
     branches: [ "main", "master", "develop" ]
 
 jobs:
-  laravel-tests:
-    name: Backend Tests & Lint (PHP)
+  ci:
+    name: CI Pipeline (Lint, Build & Test)
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # 1. Setup & Build Frontend (Node.js)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: src/package-lock.json
+
+      - name: Install Node dependencies
+        working-directory: src
+        run: npm ci
+
+      - name: Run Frontend Tests
+        working-directory: src
+        run: npm run test:unit
+
+      - name: Build Assets (Vite)
+        working-directory: src
+        run: npm run build
+
+      # 2. Setup & Test Backend (PHP)
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -54,30 +75,3 @@ jobs:
       - name: Run Backend Tests
         working-directory: src
         run: php artisan test
-
-  frontend-tests:
-    name: Frontend Tests & Build (Node)
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-          cache-dependency-path: src/package-lock.json
-
-      - name: Install Node dependencies
-        working-directory: src
-        run: npm ci
-
-      - name: Run Frontend Tests
-        working-directory: src
-        run: npm run test:unit
-
-      - name: Build Assets
-        working-directory: src
-        run: npm run build
