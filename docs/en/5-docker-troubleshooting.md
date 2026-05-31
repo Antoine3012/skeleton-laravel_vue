@@ -1,9 +1,5 @@
 # 🐳 Docker & Troubleshooting
 
-This guide lists critical Docker Compose commands and answers to the most common issues you might run into during local development.
-
----
-
 ## 🛠️ Essential Docker Compose Commands
 
 All these commands must be run from the root of the project (where the `compose.yml` file is located).
@@ -126,4 +122,5 @@ To avoid local differences in PHP or Node.js versions between your physical mach
 
 ## 🧭 Navigation
 
-| ⬅️ [Database Management (Step 4)](4-database.md) | 🏠 [Back to Homepage](../../README.md) |
+| ⬅️ [Database Management (Step 4)](4-database.md) | 🏠 [Back to Homepage](../../README.md) | [Automated Testing (Step 6) ➡️](6-tests.md) |
+

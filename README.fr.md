@@ -41,6 +41,10 @@ Pour faciliter la prise en main, la documentation a été découpée en guides t
     *   Commandes Docker indispensables (`logs`, `build`, `down -v`).
     *   Exécution de scripts Artisan, Composer et NPM dans les conteneurs.
     *   Résolutions de pannes (permissions de fichiers, réinstallations propres, conflits).
+6.  **[🧪 Tests Automatisés](docs/fr/6-tests.md)**
+    *   Structure unifiée (PHPUnit pour PHP et Vitest pour Vue 3).
+    *   Commandes pour exécuter tous les tests ou des cibles spécifiques.
+    *   Écriture de nouveaux tests unitaires backend et frontend.
 
 ---
 
@@ -90,5 +94,6 @@ L'infrastructure réseau orchestrée par le fichier `compose.yml` se compose de 
 
 *   **Arrêter les conteneurs proprement** : `docker compose down`
 *   **Voir l'activité et déboguer (logs)** : `docker compose logs -f`
+*   **Lancer les tests (PHPUnit + Vitest)** : `docker exec -it laravel_app npm run test`
 *   **Lancer une migration manuellement** : `docker exec -it laravel_app php artisan migrate`
 *   **Réinitialiser la base de données de zéro** : `docker compose down -v && docker compose up -d`

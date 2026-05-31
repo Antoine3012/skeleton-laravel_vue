@@ -1,9 +1,5 @@
 # 🗄️ Database Management
 
-This document explains the integration of the **MySQL 8.4** database service, how to manage your Laravel migrations, and how to connect using phpMyAdmin or an external SQL graphical interface.
-
----
-
 ## ⚙️ Global Configuration
 
 The MySQL service is defined inside the `compose.yml` file as follows:

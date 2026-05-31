@@ -1,9 +1,5 @@
 # ⚙️ Installation and Configuration
 
-This guide takes you step-by-step through cloning, configuring, and starting up the development environment on your host machine.
-
----
-
 ## 🛠️ Prerequisites
 
 Before starting, make sure you have installed the following tools on your system:

@@ -75,8 +75,13 @@ skeleton-laravel_vue/
     │   └── views/
     │       └── app.blade.php  # Template HTML de base chargé par Inertia
     ├── routes/                # Fichiers de définition des routes (web.php, api.php)
+    ├── tests/                 # Suite de tests automatisés (PHPUnit et Vitest)
+    │   ├── Feature/           # Tests fonctionnels PHP (Laravel)
+    │   ├── Unit/              # Tests unitaires PHP (Laravel)
+    │   └── Frontend/          # Tests unitaires & composants JS (Vue 3)
     ├── package.json           # Dépendances Node.js (Vue, Tailwind, Vite)
     ├── tailwind.config.js     # Configuration de Tailwind CSS
+    ├── vitest.config.js       # Configuration de Vitest
     └── vite.config.js         # Configuration du compilateur Vite
 ```
 
